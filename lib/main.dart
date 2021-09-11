@@ -7,8 +7,8 @@ import 'package:flutter_blue/flutter_blue.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft]);
+  // await SystemChrome.setPreferredOrientations(
+  //     [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft]);
 
   runApp(MainScreen());
 }
@@ -153,18 +153,25 @@ class _JoyPadState extends State<JoyPad> {
               "Waiting...",
               style: TextStyle(fontSize: 24, color: Colors.red),
             ),
-          ) : Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              ElevatedButton(
-                child: const Text('Write'),
-                onPressed: () { writeData("RE:GT0.001,RF:LT0.002,PE:LT0.003,PF:GT0.001"); },
-              ),
-              ElevatedButton(
-                child: const Text('Read'),
-                onPressed: () { readData(); },
-              ),
-            ],
+          ) :
+          Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children:<Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    ElevatedButton(
+                      child: const Text('Write'),
+                      onPressed: () { writeData("RE:GT0.001,RF:LT0.002,PE:LT0.003,PF:GT0.001"); },
+                    ),
+                    ElevatedButton(
+                      child: const Text('Read'),
+                      onPressed: () { readData(); },
+                    ),
+                  ],
+                )
+              ]
           )
       ),
     );
