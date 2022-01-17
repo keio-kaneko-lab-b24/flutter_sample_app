@@ -139,6 +139,16 @@ class _JoyPadState extends State<JoyPad> {
     print(data);
   }
 
+  notifyData() async{
+    if (isTargetCharacteristic != true) return;
+
+    await targetCharacteristic.setNotifyValue(true);
+    targetCharacteristic.value.listen((bytes) {
+      String data = utf8.decode(bytes);
+      print(data);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -168,6 +178,10 @@ class _JoyPadState extends State<JoyPad> {
                     ElevatedButton(
                       child: const Text('Read'),
                       onPressed: () { readData(); },
+                    ),
+                    ElevatedButton(
+                      child: const Text('Notify'),
+                      onPressed: () { notifyData(); },
                     ),
                   ],
                 )
